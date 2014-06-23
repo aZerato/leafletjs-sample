@@ -3,7 +3,7 @@ leafletjs
 
 Sample with :
 - HTML5 localization
-- get/parse a gpx document and trace track
+- get/parse a gpx document and trace track (basic function)
 - multi layer ressource (googlemap / openstreetmap)
 - dynamic markers, ...
 
