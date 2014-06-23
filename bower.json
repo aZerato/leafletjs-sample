@@ -1,0 +1,20 @@
+{
+  "name": "leafletjs-sample",
+  "version": "0.0.0",
+  "authors": [
+    "aZerato <azerato.graphe@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "leaflet": "~0.7.3",
+    "jquery": "~2.1.1",
+    "pubsub-js": "~1.4.2"
+  }
+}

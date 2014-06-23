@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet Sample</title>
+
+	<script type="text/javascript" src="scripts/vendors/jquery/jquery.js"></script>
+
+	<script type="text/javascript" src="scripts/vendors/pubsub/pubsub.js"></script>
+
+	<script type="text/javascript" src="scripts/vendors/leaflet/leaflet.js"></script>
+	<link rel="stylesheet" type="text/css" href="scripts/vendors/leaflet/leaflet.css">
+
+	<!-- googlemap -->
+    <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+    <script src="http://matchingnotes.com/javascripts/leaflet-google.js"></script>
+
+	<script type="text/javascript" src="scripts/app.js"></script>
+
+	<script type="text/javascript">
+		$(function() {
+			var $content = $('.content'),
+				controller;
+
+			// check if localization is ready (Event with pubsub)
+			var start = function() {				
+				$content.find('.spinner').addClass('hide');
+				$content.find('#leaflet').removeClass('hide');
+				
+				$content.find('#country').removeClass('hide');
+
+				controller.layerLeaflet();
+			}
+			
+			var ready = PubSub.subscribe('localizationReady', start);
+
+			// Controller
+			controller = new Controller($('#leaflet'));
+			controller.init();
+
+			// Basic dom events
+			$('li[data-action=movecountry]').click(function() {
+				controller.moveCountry($(this).data('idcountry'));
+			});
+
+			// Basic dom events
+			$('li[data-action=randommarker]').click(function() {
+				controller.createRandomMarker();
+			});
+
+			// ReadGpx
+			$('button[data-action=readgpx]').click(function() {
+				controller.readGpx();
+			});
+		});
+	</script>
+
+	<style>
+		.leaflet-map-pane {
+			z-index: 2 !important;
+		}
+
+		.leaflet-google-layer {
+			z-index: 1 !important;
+		}
+	</style>
+
+	<link rel="stylesheet" type="text/css" href="styles/app.css">
+</head>
+<body>
+	<header>
+		<h1>Leaflet Sample</h1>
+	</header>
+	
+	<div class="content">
+		<div class="spinner">
+			<div class="cube1"></div>
+			<div class="cube2"></div>
+		</div>
+		<div id="leaflet" class="hide">
+			<div id="leaflet-map"></div>
+			<div class="clear">
+				<div id="country" class="hide left">
+					<ul>
+						<li data-action="movecountry" data-idcountry="0">Your position</li>
+						<li data-action="movecountry" data-idcountry="1">Paris</li>
+						<li data-action="movecountry" data-idcountry="2">London</li>
+						<li data-action="movecountry" data-idcountry="3">Washington</li>
+						<li data-action="movecountry" data-idcountry="4">Montreal</li>
+						<li data-action="randommarker">Add Marker near your current position</li>
+					</ul>
+				</div>
+				<button data-action="readgpx">Read Gpx</button>
+			</div>
+		</div>
+		<div class="clear">
+			<p>if you have any bug with GoogleMap, test with debuger desactivated ! ;)</p>
+		</div>
+	</div>
+</body>
+</html>
